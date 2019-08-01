@@ -1,0 +1,9 @@
+[submodule "librmn"]
+	path = librmn
+	url = https://github.com/armnlib/librmn.git
+[submodule "vgrid"]
+	path = vgrid
+	url = https://gitlab.com/ECCC_CMDN/vgrid.git
+[submodule "libburp"]
+	path = libburp
+	url = https://github.com/josecmc/libburp.git
