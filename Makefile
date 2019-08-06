@@ -22,5 +22,5 @@ sharedlibs: $(LIBRMN_SHARED) $(LIBDESCRIP_SHARED) $(LIBBURPC_SHARED)
 clean:
 	git submodule foreach git clean -xdf .
 	git submodule foreach git reset --hard HEAD
-	rm *.so .patched
+	rm -f *.so .patched
 	git submodule update --init
