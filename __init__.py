@@ -43,11 +43,13 @@ def get_extra_setup_args (*path):
 
       build.run(self)
       builddir = os.path.abspath(self.build_temp)
-      sharedlib_dir = os.path.join(self.build_lib,*path)
-      sharedlib_dir = os.path.abspath(sharedlib_dir)
-      self.copy_tree('src',builddir,preserve_symlinks=1)
+      srcdir = os.path.dirname(os.path.abspath(__file__))
+      libdir = os.path.join(*path)
+      libdir = os.path.join(self.build_lib, libdir)
+      libdir = os.path.abspath(libdir)
+      self.copy_tree(srcdir,builddir,preserve_symlinks=1)
 
-      check_call(['make', 'BUILDDIR='+builddir, 'SHAREDLIB_DIR='+sharedlib_dir, 'SHAREDLIB_SUFFIX='+sharedlib_suffix], cwd=builddir)
+      check_call(['make', 'PWD='+builddir, 'BUILDDIR='+builddir, 'SHAREDLIB_DIR='+libdir, 'SHAREDLIB_SUFFIX='+sharedlib_suffix], cwd=builddir)
 
   # Force the impl and abi tags.
   # We have no extension modules, so can support any Python ABI.

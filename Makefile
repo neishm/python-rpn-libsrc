@@ -14,7 +14,6 @@ sharedlibs: $(LIBRMN_SHARED) $(LIBDESCRIP_SHARED) $(LIBBURPC_SHARED)
 	[ -z "$(EXTRA_LIBS)" ] || cp -L $(EXTRA_LIBS) $(SHAREDLIB_DIR)
 
 .patched:
-	git submodule update --init
 	cd librmn  && patch -p1 < $(PWD)/patches/librmn.patch
 	cd vgrid   && patch -p1 < $(PWD)/patches/vgrid.patch
 	cd libburp && patch -p1 < $(PWD)/patches/libburp.patch
@@ -24,3 +23,4 @@ clean:
 	git submodule foreach git clean -xdf .
 	git submodule foreach git reset --hard HEAD
 	rm *.so .patched
+	git submodule update --init
