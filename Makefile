@@ -3,7 +3,7 @@
 BUILDDIR ?= $(PWD)
 SHAREDLIB_DIR ?= $(PWD)
 
-.PHONY: all sharedlibs
+.PHONY: all sharedlibs clean
 
 all: .patched sharedlibs
 
@@ -20,3 +20,7 @@ sharedlibs: $(LIBRMN_SHARED) $(LIBDESCRIP_SHARED) $(LIBBURPC_SHARED)
 	cd libburp && patch -p1 < $(PWD)/patches/libburp.patch
 	touch $@
 
+clean:
+	git submodule foreach git clean -xdf .
+	git submodule foreach git reset --hard HEAD
+	rm *.so .patched
