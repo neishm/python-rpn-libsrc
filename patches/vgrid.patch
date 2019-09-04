@@ -8,7 +8,7 @@ index 6523ac0..9360f9e 100644
        ! Given referent, compute physical levelling information from the vertical description
        type(vgrid_descriptor), intent(in) :: self                  !Vertical descriptor instance
 diff --git a/src/Makefile b/src/Makefile
-index c4b5cad..8e2d025 100644
+index c7788be..a3e6fa4 100644
 --- a/src/Makefile
 +++ b/src/Makefile
 @@ -1,14 +1,4 @@
