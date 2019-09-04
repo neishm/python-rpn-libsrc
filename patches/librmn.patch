@@ -22,7 +22,7 @@ index fb4d0fb..8abd4db 100644
  	fi
  
 diff --git a/base/Makefile b/base/Makefile
-index bb26828..68ea9a7 100644
+index e85dbe4..20133c5 100644
 --- a/base/Makefile
 +++ b/base/Makefile
 @@ -105,7 +105,7 @@ grgg.o:		grgg.F 	kases.cdk 	pi.cdk
