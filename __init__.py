@@ -19,10 +19,11 @@ else:
 def get_extra_setup_args (*path):
   from setuptools import setup, Distribution, find_packages
   from distutils.command.build import build
-  from wheel.bdist_wheel import bdist_wheel
   import sys
   from glob import glob
   import os
+
+  cmdclass = {}
 
   # Need to force Python to treat this as a binary distribution.
   # We don't have any binary extension modules, but we do have shared
@@ -50,21 +51,26 @@ def get_extra_setup_args (*path):
       self.copy_tree(srcdir,builddir,preserve_symlinks=1)
 
       check_call(['make', 'PWD='+builddir, 'BUILDDIR='+builddir, 'SHAREDLIB_DIR='+libdir, 'SHAREDLIB_SUFFIX='+sharedlib_suffix], cwd=builddir)
+  cmdclass['build'] = BuildSharedLibs
 
   # Force the impl and abi tags.
   # We have no extension modules, so can support any Python ABI.
-  class ForcedTag(bdist_wheel):
-    def get_tag(self):
-      plat_name = self.plat_name
-      return ('py2.py3','none',plat_name)
+  try:
+    from wheel.bdist_wheel import bdist_wheel
+    class ForcedTag(bdist_wheel):
+      def get_tag(self):
+        plat_name = self.plat_name
+        return ('py2.py3','none',plat_name)
+    cmdclass['bdist_wheel'] = ForcedTag
+  # If wheel functionality is not available, then no need to augment the
+  # bdist_wheel behaviour.
+  except ImportError:
+    pass
 
   return dict(
     package_data = {
       '.'.join(path): ['*.'+sharedlib_suffix, '*.'+sharedlib_suffix+'.*'],
     },
     distclass = BinaryDistribution,
-    cmdclass= {
-      'build': BuildSharedLibs,
-      'bdist_wheel': ForcedTag,
-    },
+    cmdclass = cmdclass,
   )
