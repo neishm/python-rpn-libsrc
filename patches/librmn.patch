@@ -142,7 +142,7 @@ index c907a7f..80f84ce 100644
  int msg_level;
  
 diff --git a/fstd98/fstd98.c b/fstd98/fstd98.c
-index 0153fe6..95c3cbe 100644
+index 2b2677c..5d70064 100644
 --- a/fstd98/fstd98.c
 +++ b/fstd98/fstd98.c
 @@ -23,7 +23,7 @@
@@ -233,6 +233,21 @@ index 2204c0d..3ba1098 100644
  /*splitpoint print_std_parms */
  /***************************************************************************** 
   *                      P R I N T _ S T D _ P A R M S                        *
+diff --git a/interp/Makefile b/interp/Makefile
+index d6d8726..b538960 100644
+--- a/interp/Makefile
++++ b/interp/Makefile
+@@ -61,10 +61,8 @@ FICHIERS = $(FICHIERS_F90) $(FICHIERS_C)
+ #	ar rv libezscint-590.a.fl c_ezscint.o f_ezscint.o
+ 
+ f_ezscint.o: f_ezscint.F90
+-	s.compile -src f_ezscint.F90 $(OPTIMIZ)
+ 
+ c_ezscint.o: c_ezscint.c
+-	s.compile -src c_ezscint.c $(OPTIMIZ)
+ 
+ obj: $(OBJET)
+ #Produire les fichiers objets (.o) pour tous les fichiers
 diff --git a/lamineur/write_slab2000.c b/lamineur/write_slab2000.c
 index dabe8cd..4f4f5b3 100644
 --- a/lamineur/write_slab2000.c
