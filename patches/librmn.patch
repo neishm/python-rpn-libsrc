@@ -380,7 +380,7 @@ index 5431954..516bc3a 100644
   contents of test file test_array_file.f90 follow
  
 diff --git a/primitives/c_baseio.c b/primitives/c_baseio.c
-index 5356b1f..2a09f04 100644
+index 657504e..0854afe 100644
 --- a/primitives/c_baseio.c
 +++ b/primitives/c_baseio.c
 @@ -31,7 +31,7 @@
