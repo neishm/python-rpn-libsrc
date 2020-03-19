@@ -51,6 +51,20 @@ def get_extra_setup_args (*path):
       self.copy_tree(srcdir,builddir,preserve_symlinks=1)
 
       check_call(['make', 'PWD='+builddir, 'BUILDDIR='+builddir, 'SHAREDLIB_DIR='+libdir, 'SHAREDLIB_SUFFIX='+sharedlib_suffix], cwd=builddir)
+
+      # Patch up macOS libraries
+      if sharedlib_suffix == 'dylib':
+        from glob import glob
+        dylibs = glob(libdir+'/*.dylib')
+        for dylib in dylibs:
+          check_call(['install_name_tool', '-id', '@rpath/'+os.path.basename(dylib), dylib])
+          check_call(['install_name_tool', '-add_rpath', '.', dylib])
+          for extra_lib in os.environ.get('EXTRA_LIBS','').split():
+            check_call(['install_name_tool', '-change', extra_lib, '@rpath/'+os.path.basename(extra_lib), dylib])
+          for dyl in dylibs:
+            check_call(['install_name_tool', '-change', dyl, '@rpath/'+os.path.basename(dyl), dylib])
+
+
   cmdclass['build'] = BuildSharedLibs
 
   # Force the impl and abi tags.

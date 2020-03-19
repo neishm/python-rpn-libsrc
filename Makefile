@@ -11,7 +11,7 @@ include include/libs.mk
 
 sharedlibs: $(LIBRMN_SHARED) $(LIBVGRID_SHARED) $(LIBBURPC_SHARED)
 	# Copy extra libraries needed for runtime
-	[ -z "$(EXTRA_LIBS)" ] || cp -L $(EXTRA_LIBS) $(SHAREDLIB_DIR)
+	[ -z "$(EXTRA_LIBS)" ] || for extra in $(EXTRA_LIBS); do cp -L $$extra $(SHAREDLIB_DIR); chmod +w $(SHAREDLIB_DIR)/*; done
 
 .patched:
 	cd librmn  && patch -p1 < $(PWD)/patches/librmn.patch
