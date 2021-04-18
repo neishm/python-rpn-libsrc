@@ -142,7 +142,7 @@ index c907a7f..80f84ce 100644
  int msg_level;
  
 diff --git a/fstd98/fstd98.c b/fstd98/fstd98.c
-index 2b2677c..5d70064 100644
+index 546afb8..20bf55c 100644
 --- a/fstd98/fstd98.c
 +++ b/fstd98/fstd98.c
 @@ -23,7 +23,7 @@
@@ -166,24 +166,24 @@ index 2b2677c..5d70064 100644
  
 @@ -591,7 +593,7 @@ int c_fstecr(word *field_in, void * work, int npak,
    nw = W64TOWD(nw);
-   
+ 
    keys_len = W64TOWD((f->primary_len + f->info_len));
 -  buffer = (buffer_interface_ptr) alloca((10+keys_len+nw+128)*sizeof(word));
 +  buffer = (buffer_interface_ptr) malloc((10+keys_len+nw+128)*sizeof(word));
-   if (buffer) 
+   if (buffer)
      memset(buffer,0,(10+keys_len+nw+128)*sizeof(word));
    else {
 @@ -948,7 +950,7 @@ int c_fstecr(word *field_in, void * work, int npak,
      sprintf(string,"Write(%d)",iun);
      print_std_parms(stdf_entry,string,prnt_options,0);
    }
--/*  free(buffer);        remplaced by alloca */
+-/*  free(buffer);        replaced by alloca */
 +  free(buffer);
    xdf_double = 0;
    xdf_short = 0;
    xdf_byte = 0;
 @@ -1815,7 +1817,7 @@ int c_fstluk(word *field, int handle, int *ni, int *nj, int *nk)
-     
+ 
  /*  printf("Debug+ fstluk lng2 = %d\n",lng2); */
    /* allocate 8 more bytes in case of realingment for 64 bit data */
 -  if ((work_field = alloca(8+(lng2+10)*sizeof(word))) == NULL) {
@@ -201,10 +201,10 @@ index 2b2677c..5d70064 100644
    xdf_short = 0;
    xdf_byte = 0;
 diff --git a/fstd98/if_fstd98.c b/fstd98/if_fstd98.c
-index 2204c0d..3ba1098 100644
+index 74b8d28..3b64a00 100644
 --- a/fstd98/if_fstd98.c
 +++ b/fstd98/if_fstd98.c
-@@ -1698,6 +1698,8 @@ ftnword f77name(ip3_val)(ftnfloat *f_level, ftnword *f_kind)
+@@ -1718,6 +1718,8 @@ ftnword f77name(ip3_val)(ftnfloat *f_level, ftnword *f_kind)
    return((ftnword) ip3);
  }
  
@@ -213,7 +213,7 @@ index 2204c0d..3ba1098 100644
  
  /*splitpoint fst_can_translate_name */
  static char exception_vars[256]="~^[<>!^]";  /* by default ignore names starting with >!^ */
-@@ -1749,6 +1751,19 @@ int FstCanTranslateName(char *varname)  /* is this name NOT FOUND in do no trans
+@@ -1769,6 +1771,19 @@ int FstCanTranslateName(char *varname)  /* is this name NOT FOUND in do no trans
    }
    return result;
  }
@@ -249,7 +249,7 @@ index d6d8726..b538960 100644
  obj: $(OBJET)
  #Produire les fichiers objets (.o) pour tous les fichiers
 diff --git a/lamineur/write_slab2000.c b/lamineur/write_slab2000.c
-index dabe8cd..4f4f5b3 100644
+index aaa1393..e5c25fc 100644
 --- a/lamineur/write_slab2000.c
 +++ b/lamineur/write_slab2000.c
 @@ -39,6 +39,9 @@
@@ -380,7 +380,7 @@ index 5431954..516bc3a 100644
   contents of test file test_array_file.f90 follow
  
 diff --git a/primitives/c_baseio.c b/primitives/c_baseio.c
-index 657504e..0854afe 100644
+index bf28520..dc1d82c 100644
 --- a/primitives/c_baseio.c
 +++ b/primitives/c_baseio.c
 @@ -31,7 +31,7 @@
@@ -568,7 +568,7 @@ index 6cc5740..9f6589b 100644
 -
 +#endif
 diff --git a/primitives/dmms.c b/primitives/dmms.c
-index 483b7a8..2b1f30f 100644
+index 239688b..c889b30 100644
 --- a/primitives/dmms.c
 +++ b/primitives/dmms.c
 @@ -25,7 +25,7 @@
@@ -857,7 +857,7 @@ index af5daef..b9eb3d3 100644
  #ifdef WIN32    /*CHC/NRC*/
  void f77name(stkmem2)(_int64 *f_nbytes,void **ptr)
 diff --git a/primitives/vmm.c b/primitives/vmm.c
-index 9e3ffbc..6be979d 100644
+index 647c383..bde6fa9 100644
 --- a/primitives/vmm.c
 +++ b/primitives/vmm.c
 @@ -34,7 +34,7 @@
@@ -870,7 +870,7 @@ index 9e3ffbc..6be979d 100644
  #include <unistd.h>
  #include <sys/types.h>
 diff --git a/template_utils/whiteboard/WhiteBoard.c b/template_utils/whiteboard/WhiteBoard.c
-index eafb9e8..4f40448 100644
+index 792c117..7a0b7e4 100644
 --- a/template_utils/whiteboard/WhiteBoard.c
 +++ b/template_utils/whiteboard/WhiteBoard.c
 @@ -18,7 +18,7 @@

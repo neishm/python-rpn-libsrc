@@ -1,6 +1,6 @@
 include include/compiler.mk
 
-LIBRMN_VERSION = 019.5
+LIBRMN_VERSION = 19.7.0
 VGRID_VERSION = 6.4.2
 LIBBURPC_VERSION = 1.9
 
