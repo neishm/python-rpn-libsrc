@@ -12,5 +12,8 @@ ifneq (,$(GCC10CHECK))
 FFLAGS := $(FFLAGS) -fallow-argument-mismatch -fallow-invalid-boz
 CFLAGS := $(CFLAGS) -fcommon
 endif
+# Needed for macOS, which recently started throwing errors for implicit
+# function declarations.
+CFLAGS := $(CFLAGS) -Wno-error=implicit-function-declaration
 endif
 
